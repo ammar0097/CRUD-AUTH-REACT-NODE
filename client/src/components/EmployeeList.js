@@ -10,7 +10,7 @@ const EmployeeList = () => {
     Axios.get("http://localhost:3001/employees/").then((res) => {
       setEmployees(res.data);
     });
-  }, []);
+  }, [employees]);
 
   return (
     <div>
