@@ -3,9 +3,11 @@ import "./Form.css";
 import React, { useState, useEffect } from "react";
 import "./EmployeeList.css";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from "react-router-dom";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState();
+  let navigate = useNavigate();
 
   useEffect(() => {
     Axios.get("http://localhost:3001/employees/").then((res) => {
@@ -39,12 +41,13 @@ const EmployeeList = () => {
                 <td>{val.country}</td>
                 <td>{val.position}</td>
                 <td>{val.wage}</td>
-                <td><DeleteIcon className="form-icon" type="delete" onClick={() => deleteEmployee(val.id)}>delete</DeleteIcon></td>
+                <td><DeleteIcon  className="form-icon" type="delete" onClick={() => deleteEmployee(val.id)}></DeleteIcon></td>
               </tr>
             </tbody>
           );
         })}
       </table>
+      <button className="form-button" onClick={() => {navigate("/add")}} >Add employee</button>
     </div>
   );
 };
