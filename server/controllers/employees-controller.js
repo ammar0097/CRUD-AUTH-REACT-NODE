@@ -28,5 +28,11 @@ const addEmployee = (req, res, next) => {
   });
 };
 
+const deleteEmployee = (req, res, next) => {
+  const empId = req.params.eid;
+  Employee.destroy({where : {id : empId}});
+};
+
 exports.getAllEmployees = getAllEmployees;
 exports.addEmployee = addEmployee;
+exports.deleteEmployee = deleteEmployee;

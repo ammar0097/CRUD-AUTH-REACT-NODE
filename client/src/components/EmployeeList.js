@@ -2,6 +2,7 @@ import Axios from "axios";
 import "./Form.css";
 import React, { useState, useEffect } from "react";
 import "./EmployeeList.css";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState();
@@ -11,6 +12,11 @@ const EmployeeList = () => {
       setEmployees(res.data);
     });
   }, [employees]);
+
+
+  const deleteEmployee = (id) => {
+    Axios.delete(`http://localhost:3001/employees/${id}`);
+  }
 
   return (
     <div>
@@ -33,6 +39,7 @@ const EmployeeList = () => {
                 <td>{val.country}</td>
                 <td>{val.position}</td>
                 <td>{val.wage}</td>
+                <td><DeleteIcon className="form-icon" type="delete" onClick={() => deleteEmployee(val.id)}>delete</DeleteIcon></td>
               </tr>
             </tbody>
           );
