@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./EmployeeList.css";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState();
@@ -41,7 +42,11 @@ const EmployeeList = () => {
                 <td>{val.country}</td>
                 <td>{val.position}</td>
                 <td>{val.wage}</td>
-                <td><DeleteIcon  className="form-icon" type="delete" onClick={() => deleteEmployee(val.id)}></DeleteIcon></td>
+              <td>
+                <button><DeleteIcon  className="form-icon table-button" type="delete" onClick={() => deleteEmployee(val.id)}></DeleteIcon></button>
+                <button><EditIcon  className="form-icon table-button" type="submit" onClick={() => {navigate(`/update/${val.id}`)}} ></EditIcon></button>
+
+              </td>
               </tr>
             </tbody>
           );
