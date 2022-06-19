@@ -1,26 +1,33 @@
-import {  useState } from "react";
+import { useState , useEffect } from "react";
 import Axios from "axios";
 import "./Form.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateForm = () => {
-
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
   const [country, setCountry] = useState("");
   const [position, setPosition] = useState("");
   const [wage, setWage] = useState(0);
+
   let navigate = useNavigate();
-  
+
   let eid = useParams().eid;
 
-
-/*
-    Axios.get(`http://localhost:3001/employees/${eid}`).then((res) => {
-      setEmployeeData(res.data);
-      console.log(employeeData);
-})
-*/
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/employees/${eid}`)
+      .then((res) => {
+        setName(res.data.name);
+        setCountry(res.data.country);
+        setPosition(res.data.position);
+        setAge(res.data.age);
+        setWage(res.data.wage);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },[]);
+ 
 
   const updateEmployee = (eid) => {
     Axios.patch(`http://localhost:3001/employees/${eid}`, {
@@ -39,6 +46,7 @@ const UpdateForm = () => {
         onChange={(event) => {
           setName(event.target.value);
         }}
+        value={name}
       />
       <label>Age : </label>
       <input
@@ -46,6 +54,7 @@ const UpdateForm = () => {
         onChange={(event) => {
           setAge(event.target.value);
         }}
+        value={age}
       />
       <label>Country : </label>
       <input
@@ -53,6 +62,7 @@ const UpdateForm = () => {
         onChange={(event) => {
           setCountry(event.target.value);
         }}
+        value={country}
       />
       <label>Position : </label>
       <input
@@ -60,6 +70,7 @@ const UpdateForm = () => {
         onChange={(event) => {
           setPosition(event.target.value);
         }}
+        value={position}
       />
       <label>Wage(year) : </label>
       <input
@@ -67,12 +78,25 @@ const UpdateForm = () => {
         onChange={(event) => {
           setWage(event.target.value);
         }}
+        value={wage}
       />
-      <button className="form-button" type="submit" onClick={()=> {updateEmployee(eid)}}>
+      <button
+        className="form-button"
+        type="submit"
+        onClick={() => {
+          updateEmployee(eid);
+        }}
+      >
         Update Employee
       </button>
-      <button className="form-button" onClick={() => {navigate("/")}} >Employees List</button>
-
+      <button
+        className="form-button"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        Employees List
+      </button>
     </div>
   );
 };

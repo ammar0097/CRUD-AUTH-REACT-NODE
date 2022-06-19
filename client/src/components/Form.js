@@ -10,6 +10,7 @@ const Form = () => {
   const [country, setCountry] = useState("");
   const [position, setPosition] = useState("");
   const [wage, setWage] = useState(0);
+  const [isLoading,setIsLoading] = useState(false);
   let navigate = useNavigate();
 
   const addEmployee = () => {
@@ -19,7 +20,8 @@ const Form = () => {
       country: country,
       position: position,
       wage: wage,
-    }).then(navigate('/'));
+    }
+    ).then(navigate('/'));
   };
   return (
     <div className="information">
