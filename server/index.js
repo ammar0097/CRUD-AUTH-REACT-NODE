@@ -12,6 +12,8 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+
+
 app.use("/employees", employeesRoutes);
 app.use("/", usersRoutes);
 
