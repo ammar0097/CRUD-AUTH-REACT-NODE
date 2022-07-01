@@ -20,6 +20,11 @@ const Form = () => {
       country: country,
       position: position,
       wage: wage,
+    },
+    {
+      headers : {
+        accessToken : sessionStorage.getItem("token")
+      }
     }
     ).then(navigate('/'));
   };

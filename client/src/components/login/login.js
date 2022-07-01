@@ -22,7 +22,7 @@ const Login = () => {
     <div className="information">
       <label>Email : </label>
       <input
-        type="email"
+        type="text"
         onChange={(event) => {
           setEmail(event.target.value);
         }}

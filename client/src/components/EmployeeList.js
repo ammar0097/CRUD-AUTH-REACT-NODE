@@ -18,7 +18,12 @@ const EmployeeList = () => {
 
 
   const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/employees/${id}`);
+    Axios.delete(`http://localhost:3001/employees/${id}`,
+    {
+      headers : {
+        accessToken : sessionStorage.getItem("token")
+      }
+    });
   }
 
   return (

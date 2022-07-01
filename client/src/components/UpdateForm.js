@@ -14,7 +14,7 @@ const UpdateForm = () => {
 
   let eid = useParams().eid;
 
-  useEffect(() => {
+  useEffect((eid) => {
     Axios.get(`http://localhost:3001/employees/${eid}`)
       .then((res) => {
         setName(res.data.name);
@@ -36,7 +36,9 @@ const UpdateForm = () => {
       country: country,
       position: position,
       wage: wage,
-    }).then(navigate("/"));
+    },
+    
+    ).then(navigate("/"));
   };
   return (
     <div className="information">

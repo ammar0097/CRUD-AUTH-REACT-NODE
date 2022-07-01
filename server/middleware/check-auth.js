@@ -4,7 +4,7 @@ const HttpError = require("../models/http-error");
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1]; //
+    const token = req.header("accessToken"); //
     if (!token) {
       const error = new HttpError("authentication failed!", 401);
       return next(error);
