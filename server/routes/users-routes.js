@@ -4,7 +4,7 @@ const usersController = require("../controllers/users-controller");
 const router = express.Router();
 
 router.post('/signup',usersController.signup);
-router.get('/login',usersController.login);
+router.post('/login',usersController.login);
 
 
 
