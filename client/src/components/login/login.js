@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  let navigate = useNavigate();
+
 
   const login = () => {
     Axios.post("http://localhost:3001/login", {
@@ -14,6 +18,7 @@ const Login = () => {
         alert(res.data.error);
       } else {
         sessionStorage.setItem("token", res.data.token);
+        navigate("/");
       }
     });
   };

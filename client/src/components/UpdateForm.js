@@ -15,7 +15,11 @@ const UpdateForm = () => {
   let eid = useParams().eid;
 
   useEffect((eid) => {
-    Axios.get(`http://localhost:3001/employees/${eid}`)
+    Axios.get(`http://localhost:3001/employees/${eid}`,{
+      headers : {
+        accessToken : sessionStorage.getItem("token")
+      }
+    })
       .then((res) => {
         setName(res.data.name);
         setCountry(res.data.country);

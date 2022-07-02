@@ -2,9 +2,9 @@ import Axios from "axios";
 import "./Form.css";
 import React, { useState, useEffect } from "react";
 import "./EmployeeList.css";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from "@mui/icons-material/Edit";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState();
@@ -16,15 +16,13 @@ const EmployeeList = () => {
     });
   }, [employees]);
 
-
   const deleteEmployee = (id) => {
-    Axios.delete(`http://localhost:3001/employees/${id}`,
-    {
-      headers : {
-        accessToken : sessionStorage.getItem("token")
-      }
+    Axios.delete(`http://localhost:3001/employees/${id}`, {
+      headers: {
+        accessToken: sessionStorage.getItem("token"),
+      },
     });
-  }
+  };
 
   return (
     <div>
@@ -47,17 +45,37 @@ const EmployeeList = () => {
                 <td>{val.country}</td>
                 <td>{val.position}</td>
                 <td>{val.wage}</td>
-              <td>
-                <button><DeleteIcon  className="form-icon table-button" type="delete" onClick={() => deleteEmployee(val.id)}></DeleteIcon></button>
-                <button><EditIcon  className="form-icon table-button" type="submit" onClick={() => {navigate(`/update/${val.id}`)}} ></EditIcon></button>
-
-              </td>
+                <td>
+                  <button>
+                    <DeleteIcon
+                      className="form-icon table-button"
+                      type="delete"
+                      onClick={() => deleteEmployee(val.id)}
+                    ></DeleteIcon>
+                  </button>
+                  <button>
+                    <EditIcon
+                      className="form-icon table-button"
+                      type="submit"
+                      onClick={() => {
+                        navigate(`/update/${val.id}`);
+                      }}
+                    ></EditIcon>
+                  </button>
+                </td>
               </tr>
             </tbody>
           );
         })}
       </table>
-      <button className="form-button" onClick={() => {navigate("/add")}} >Add employee</button>
+      <button
+        className="form-button"
+        onClick={() => {
+          navigate("/add");
+        }}
+      >
+        Add employee
+      </button>
     </div>
   );
 };
