@@ -70,12 +70,12 @@ const login = async (req, res, next) => {
   try {
     existingUser = await User.findOne({ where: { email: email } });
   } catch {
-    const error = new HttpError("login in failed try again later", 500);
-    return next(error);
+    return res.status(500).json({ message: "Login in failed try again later" });
   }
   if (!existingUser) {
-    const error = new HttpError("invalid credentials , could not login", 401);
-    return next(error);
+    return res
+      .status(401)
+      .json({ message: "invalid credentials , could not login" });
   }
 
   let isValidPassword = false;
@@ -109,7 +109,6 @@ const login = async (req, res, next) => {
   res
     .status(201)
     .json({ userId: existingUser.id, email: existingUser.email, token: token });
-
 };
 
 exports.signup = signup;

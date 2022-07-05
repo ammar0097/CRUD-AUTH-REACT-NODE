@@ -25,6 +25,7 @@ const EmployeeList = () => {
   };
 
   return (
+    
     <div>
       <table className="zui-table">
         <thead>
